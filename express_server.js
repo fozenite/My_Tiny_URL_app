@@ -27,18 +27,14 @@ app.get("/urls", (req,res) => {
 
 // ------ Event handler for displaying a single URL and its shortened  //
 app.get("/urls/:id", (req, res) => {
-  let templateVars = { shortURL: req.params.id };
-  res.render("urls_show", templateVars);
-});
+ let templateVars = { shortURL: req.params.id,
+                      longURL: urlDatabase[req.params.id] };
+ console.log(req.params);
+ console.log(req.params.id);
 
+ res.render("urls_show", templateVars);
+});
 // --------------------------------------------------------------------//
-app.get("/urls.json", (req,res) => {
-  res.json(urlDatabase);
-});
-
-app.get("/hello", (req, res) => {
-  res.end("<html><body>Hello <b>World</b></body></html>\n");
-});
 
 
 
