@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>TinyApp</title>
+</head>
+<body>
+    <!-- Add your EJS code here -->
+
+
+    <!-- List or table of the URLs and their shortened forms -->
+  <ul>
+      <% for (i in urls) { %>
+        <li><%=i %> : <%=urls[i] %></li>
+      <% } %>
+  </ul>
+
+
+  <!-- Link to make Tiny -->
+  <button>
+    <a href="url">Make Tiny</a>
+  </button>
+
+</body>
+</html>
