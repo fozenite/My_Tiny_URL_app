@@ -83,6 +83,19 @@ app.get("/u/:shortURL", (req, res) => {
 
 });
 
+// Get OUR UPDATE REQUEST
+app.post("/urls/:id", (req,res) =>{
+
+  let shortURL = req.params.id;
+  let longURL  = req.body.longURL;
+
+  urlDatabase[shortURL] = longURL;
+
+
+  res.redirect("http://localhost:8080/urls/");
+
+
+});
 
 // ------ Event handler for displaying a single URL and its shortened  //
 app.get("/urls/:id", (req, res) => {

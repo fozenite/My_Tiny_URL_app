@@ -6,8 +6,12 @@
  <% include ./partials/_header.ejs %>
 </head>
 <body>
-  <p><%= shortURL %> - <%=longURL %></p>
-    <!-- Add your EJS code here -->
+
+    <form action="/urls/<%=shortURL %>" method="POST" style="margin:150px;">
+      <h2><b>ShortURL: <%= shortURL %></b></h2>
+      <input id="longURL" type="text" name="longURL" placeholder="<%= longURL %>" style="width: 300px">
+      <input type="submit" value="Update">
+    </form>
 
 
 
