@@ -39,15 +39,17 @@ app.get("/urls/new", (req, res) => {
 
 app.post("/urls", (req, res) => {
 
+  // GET A RANDOM 6 CHAR LONG ALPHANUMERIC STRING USING OUR RANDOM STRING PACKAGE
   var myRandomShortURL = generateRandomString();
+  // <INPUT> name =longURL </INPUT> From EJS URLS_NEW IS GIVING US THIS
   let getURL = req.body.longURL;
 
-  // ADD TO OUR OBJECT
+  // ADD New URL to OUR DATABASE
 
   urlDatabase[myRandomShortURL] = getURL;
-  console.log(urlDatabase);
+ // console.log(urlDatabase);
   var reDirectPath = "http://localhost:8080/urls/" + myRandomShortURL;
-  console.log(reDirectPath);
+  // console.log(reDirectPath);
   res.redirect(reDirectPath);
 
 
