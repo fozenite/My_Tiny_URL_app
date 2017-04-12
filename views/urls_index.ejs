@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <% include ./partials/_header.ejs %>
+
 </head>
 <body>
     <!-- Add your EJS code here -->
@@ -10,15 +11,23 @@
     <!-- List or table of the URLs and their shortened forms -->
   <ul>
       <% for (i in urls) { %>
-        <li><%=i %> : <%=urls[i] %></li>
+        <div class ="container">
+            <div class="row">
+                  <div class="col-xs-6">
+                      <li><%=i %> : <%=urls[i] %></li>
+                  </div>
+                  <div class="col-xs-6">
+                      <form method="POST" action="/urls/<%=i %>/delete">
+                            <button type="submit">Delete<img src="http://customwastega.com/wp-content/uploads/2015/02/noun_16193.png" alt="Waste-basket" style="width:20px;height:20px;">
+                            </button>
+                      </form>
+                  </div>
+            </div>
+        </div>
       <% } %>
   </ul>
 
 
-  <!-- Link to make Tiny -->
-  <button>
-    <a href="url">Make Tiny</a>
-  </button>
 
 </body>
 </html>

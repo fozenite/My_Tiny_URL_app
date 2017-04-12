@@ -36,7 +36,7 @@ var urlDatabase = {
 app.get("/urls/new", (req, res) => {
   res.render("urls_new");
 });
-
+// RESPOND TO A POST TO ADD TO OUR DATABASE
 app.post("/urls", (req, res) => {
 
   // GET A RANDOM 6 CHAR LONG ALPHANUMERIC STRING USING OUR RANDOM STRING PACKAGE
@@ -53,6 +53,14 @@ app.post("/urls", (req, res) => {
   res.redirect(reDirectPath);
 
 
+});
+// RESPONDING TO OUR DELETE REQUEST
+app.post("/urls/:id/delete", (req,res) => {
+    // GETTING WHICH SHORT URL KEY TO DELETE FROM OBJECT
+    let ObtainedShortURL_to_Delete = req.params.id;
+    // DELTETING FROM OUT OBJECT DATABASE
+    delete urlDatabase[ObtainedShortURL_to_Delete];
+    res.redirect("http://localhost:8080/urls/");
 });
 
 // ------- /urls Event Handler-------------------//
