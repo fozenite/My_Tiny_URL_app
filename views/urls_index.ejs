@@ -2,13 +2,8 @@
 <html lang="en">
 <head>
   <% include ./partials/_header.ejs %>
-
 </head>
 <body>
-    <!-- Add your EJS code here -->
-
-
-    <!-- List or table of the URLs and their shortened forms -->
   <ul>
       <% for (i in urls) { %>
         <div class ="container">
@@ -20,9 +15,6 @@
                   <div class="col-xs-4">
                       <a href="/urls/<%=i %>/">Edit</a>
                   </div>
-
-
-
                   <div class="col-xs-4">
                       <form method="POST" action="/urls/<%=i %>/delete">
 
@@ -30,13 +22,9 @@
                             </button>
                       </form>
                   </div>
-
             </div>
         </div>
       <% } %>
   </ul>
-
-
-
 </body>
 </html>

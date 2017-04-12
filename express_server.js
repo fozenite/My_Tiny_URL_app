@@ -1,5 +1,10 @@
 var express = require("express");
-var app = express();
+
+
+
+var cookieParser = require('cookie-parser')
+var app = express()
+app.use(cookieParser())
 var PORT = process.env.PORT || 8080; // default port
 
 // RandomString package //
@@ -21,6 +26,7 @@ return myRandomString;
 const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({extended: true}));
 
+
 //------------//
 
 // TELLS EXPRESS TO USE THE EJS TEMPLATING AGENT
@@ -34,7 +40,8 @@ var urlDatabase = {
 
 // GET NEW URLS HERE --------------------------------------------------//
 app.get("/urls/new", (req, res) => {
-  res.render("urls_new");
+  let templateVars = {username: req.cookies["username"]};
+  res.render("urls_new", templateVars);
 });
 // RESPOND TO A POST TO ADD TO OUR DATABASE
 app.post("/urls", (req, res) => {
@@ -65,7 +72,8 @@ app.post("/urls/:id/delete", (req,res) => {
 
 // ------- /urls Event Handler-------------------//
 app.get("/urls", (req,res) => {
-  let templateVars = { urls: urlDatabase};
+  let templateVars = { urls: urlDatabase,
+  username: req.cookies["username"]};
 
   res.render("urls_index", templateVars);
 });
@@ -100,20 +108,34 @@ app.post("/urls/:id", (req,res) =>{
 // ------ Event handler for displaying a single URL and its shortened  //
 app.get("/urls/:id", (req, res) => {
  let templateVars = { shortURL: req.params.id,
-                      longURL: urlDatabase[req.params.id] };
+                      longURL: urlDatabase[req.params.id],
+                      username: req.cookies["username"] };
 
 
  res.render("urls_show", templateVars);
 });
 // --------------------------------------------------------------------//
 
+app.post("/login", (req,res) => {
+  let myCookie = req.body.username;
+  //console.log(myCookie);
+  res.cookie('username',myCookie);
 
+  res.redirect("http://localhost:8080/urls/");
 
-
-
+});
 // ---------------------------------------------------------------------//
+// LOGOUT
+app.post("/logout", (req,res) => {
+  let myCookie = req.cookies["username"];
+  //console.log(myCookie);
+  res.clearCookie('username', myCookie);
 
+  res.redirect("http://localhost:8080/urls/");
 
+});
+
+// ----------------------------------------------------------------------//
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}!`);
 });

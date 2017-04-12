@@ -1,10 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <title>TinyApp</title>
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-</head>
+  <style>
+  h1 {
+    text-align:center;
+  }
 
+  h2 {
+    text-align:right;
+  }
+
+
+  </style>
+<h1><u>Tiny URL</u></h1>
+<div class ="container">
+
+                          <!-- Checking if user name exists or not-->
+                          <% if (!username){  %>
+                            <form action="/login" method="POST" >
+                              <label for="longURL">User name:</label>
+                              <input id="username" type="text" name="username" placeholder="enter a user name" style="width: 200px">
+                              <input type="submit" value="Submit">
+                            </form>
+                          <% } else {%>
+                            <form action="/logout" method="POST" >
+                             <button type="submit"> Logout </button>
+                             <h3><%=username %> is logged in</h3>
+                            </form>
+                          <%}     %>
+</div>
+</head>
 </html>
