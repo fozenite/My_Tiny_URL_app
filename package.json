@@ -10,7 +10,9 @@
     "express": "^4.15.2",
     "randomstring": "^1.1.5"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
