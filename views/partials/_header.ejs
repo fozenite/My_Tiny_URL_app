@@ -8,29 +8,31 @@
   h1 {
     text-align:center;
   }
-
   h2 {
     text-align:right;
   }
-
-
+  #page_title {
+    text-align: center;
+  }
   </style>
-<h1><u>Tiny URL</u></h1>
-<div class ="container">
 
+<div class ="row">
+                        <div class ="col-sm-5">
+                        <h1><u>Tiny URL</u></h1>
+                        </div>
+
+                        <div class ="col-sm-7">
                           <!-- Checking if user name exists or not-->
-                          <% if (!username){  %>
-                            <form action="/login" method="POST" >
-                              <label for="longURL">User name:</label>
-                              <input id="username" type="text" name="username" placeholder="enter a user name" style="width: 200px">
-                              <input type="submit" value="Submit">
+                          <% if (user){  %>
+                           <form action="/logout" method="POST" >
+                             <button type="submit"> Logout </button>
+                             <h3><%=user.id%> is logged in</h3>
                             </form>
                           <% } else {%>
-                            <form action="/logout" method="POST" >
-                             <button type="submit"> Logout </button>
-                             <h3><%=username %> is logged in</h3>
-                            </form>
-                          <%}     %>
+                          <p>You are not logged in. Returning User? Click <a href ="/login">Login </a> to log in</p>
+                          <p> OR Click <a href ="/register">Register</a> to Sign up</p>
+                          <%}  %>
+                        </div>
 </div>
 </head>
 </html>

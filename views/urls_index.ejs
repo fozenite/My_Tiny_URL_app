@@ -5,11 +5,11 @@
 </head>
 <body>
   <ul>
-      <% for (i in urls) { %>
+      <% for (i in urls[user.id]) { %>
         <div class ="container">
             <div class="row">
                   <div class="col-md-4">
-                      <li><%=i %> : <%=urls[i] %></li>
+                      <li><%=i %> : <%=urls[user.id][i] %></li>
                   </div>
 
                   <div class="col-xs-4">
