@@ -11,9 +11,18 @@
   h2 {
     text-align:right;
   }
+<<<<<<< HEAD
   #page_title {
     text-align: center;
   }
+=======
+
+
+  #page_title {
+    text-align: center;
+  }
+
+>>>>>>> 8af32c062cc6ddfa2258dfc907ea769cbc8c3fe1
   </style>
 
 <div class ="row">
@@ -24,6 +33,10 @@
                         <div class ="col-sm-7">
                           <!-- Checking if user name exists or not-->
                           <% if (user){  %>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8af32c062cc6ddfa2258dfc907ea769cbc8c3fe1
                            <form action="/logout" method="POST" >
                              <button type="submit"> Logout </button>
                              <h3><%=user.id%> is logged in</h3>
@@ -31,7 +44,13 @@
                           <% } else {%>
                           <p>You are not logged in. Returning User? Click <a href ="/login">Login </a> to log in</p>
                           <p> OR Click <a href ="/register">Register</a> to Sign up</p>
+<<<<<<< HEAD
                           <%}  %>
+=======
+
+                          <%}  %>
+
+>>>>>>> 8af32c062cc6ddfa2258dfc907ea769cbc8c3fe1
                         </div>
 </div>
 </head>

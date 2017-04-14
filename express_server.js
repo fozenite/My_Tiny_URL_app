@@ -47,6 +47,7 @@ return myReturnVal;
 }
 
 
+<<<<<<< HEAD
 // LookUp LongURL via ShortURL input
 function lookUpLongURL(shortURL) {
 
@@ -85,6 +86,8 @@ function updateMyDatabase(shortURL,longURL) {
       });
     });
 }
+=======
+>>>>>>> 8af32c062cc6ddfa2258dfc907ea769cbc8c3fe1
 
 // MIDDLE WARE //
 
@@ -119,7 +122,10 @@ const users = {
 app.get("/urls/new", (req, res) => {
   let currentUserCookie = req.cookies['user_id'];
   let templateVars = {user: users[currentUserCookie]};
+<<<<<<< HEAD
   if(currentUserCookie){
+=======
+>>>>>>> 8af32c062cc6ddfa2258dfc907ea769cbc8c3fe1
   res.render("urls_new", templateVars);
   } else {
   res.redirect("/");
@@ -295,9 +301,12 @@ app.post("/register",(req,res) =>{
         email: templateVars.email,
         password: templateVars.password
        };
+<<<<<<< HEAD
 
     // SETUP AN EMPTY OBJECT FOR THE NEW USER
        urlDatabase[user_id] = {};
+=======
+>>>>>>> 8af32c062cc6ddfa2258dfc907ea769cbc8c3fe1
         res.cookie('user_id',user_id);
         res.redirect("/");
   }
@@ -313,6 +322,20 @@ app.get("/",(req,res) =>{
 });
 
 
+<<<<<<< HEAD
+=======
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> 8af32c062cc6ddfa2258dfc907ea769cbc8c3fe1
 // ----------------------------------------------------------------------//
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}!`);
