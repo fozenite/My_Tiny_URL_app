@@ -342,6 +342,11 @@ app.get("/",(req,res) =>{
   }
 });
 
+app.get("/home",(req,res) =>{
+  let currentUserCookie = req.session.user_id;
+  let templateVars = {user: users[currentUserCookie] };
+  res.render("home",templateVars);
+}
 
 
 app.listen(PORT, () => {
