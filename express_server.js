@@ -57,11 +57,8 @@ function lookUpLongURL(shortURL,req, reqType) {
 let currentUserCookie = req.session.user_id;
 let myReturnVal = "";
     Object.keys(urlDatabase).forEach(key => {
-
       Object.keys(urlDatabase[key]).forEach(key2 => {
-
         if(shortURL == key2){
-          console.log("I found you!!!");
           if((key == currentUserCookie)||(reqType == "lookup")){
           myReturnVal = urlDatabase[key][key2];
           } else {
@@ -69,7 +66,6 @@ let myReturnVal = "";
           }
         }
       });
-
     });
 return myReturnVal;
 }
@@ -87,9 +83,7 @@ function updateMyDatabase(shortURL, longURL,userCookie) {
 
         if(shortURL == key2){
           found = 1;
-          console.log("YOU GOT IT");
           urlDatabase[key][key2]=longURL;
-
         }
       });
     });
@@ -142,12 +136,8 @@ app.post("/urls", (req, res) => {
   if(currentUserCookie){
   // ADD New URL to OUR DATABASE
   urlDatabase[currentUserCookie][myRandomShortURL] = getURL;
-
-
-  console.log(urlDatabase);
- // console.log(urlDatabase);
   var reDirectPath = "http://localhost:8080/urls/" + myRandomShortURL;
-  // console.log(reDirectPath);
+
   res.redirect(reDirectPath);
   } else {
     res.status(401).redirect("/urls");
@@ -165,8 +155,7 @@ app.post("/urls/:id/delete", (req,res) => {
       Object.keys(urlDatabase[key]).forEach(key2 => {
 
         if(ObtainedShortURL_to_Delete == key2){
-          console.log("I found you!!!");
-          delete urlDatabase[key][key2];
+        delete urlDatabase[key][key2];
         }
       });
     });
@@ -230,10 +219,7 @@ app.get("/urls/:id", (req, res) => {
   let templateVars = { shortURL: req.params.id,
                       longURL: longURLf,
                       user: users[currentUserCookie] };
-  console.log(urlDatabase);
 
-
-//let found = updateMyDatabase(templateVars.shortURL,templateVars.longURL, currentUserCookie);
   if(!longURLf){
       if(!currentUserCookie){
         res.status(401).redirect("/urls");
@@ -332,9 +318,7 @@ app.post("/register",(req,res) =>{
 // ROOT PATH GET REQUEST
 app.get("/",(req,res) =>{
   let currentUserCookie = req.session.user_id;
-  // let templateVars = {user: users[currentUserCookie] };
-  // res.render("home",templateVars);
-   // IF CURRENT USER COOKIE EXISTS GO TO URLS PAGE
+
   if(currentUserCookie){
     res.redirect("/urls");
   } else {
