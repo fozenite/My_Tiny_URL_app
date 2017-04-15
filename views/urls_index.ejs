@@ -4,6 +4,7 @@
   <% include ./partials/_header.ejs %>
 </head>
 <body>
+  <% if(user) {%>
   <ul>
       <% for (i in urls[user.id]) { %>
         <div class ="container">
@@ -24,7 +25,14 @@
                   </div>
             </div>
         </div>
+
       <% } %>
   </ul>
+
+  <% } else {%>
+
+  <h3 align="center"> <font color="red">You are not logged in. Nothing to show here. Please login by clicking the login link above</font></h3>
+
+  <% } %>
 </body>
 </html>

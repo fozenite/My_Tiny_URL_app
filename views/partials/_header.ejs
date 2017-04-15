@@ -1,57 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <title>TinyApp</title>
+
+
+
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   <style>
-  h1 {
-    text-align:center;
-  }
-  h2 {
-    text-align:right;
-  }
-<<<<<<< HEAD
-  #page_title {
-    text-align: center;
-  }
-=======
+
 
 
   #page_title {
     text-align: center;
   }
 
->>>>>>> 8af32c062cc6ddfa2258dfc907ea769cbc8c3fe1
+
+
+  #page_title {
+    text-align: center;
+  }
+
+  ul.horizontal {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: black;
+  }
+  .active {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none
+  }
+
+  .active:hover {
+    background-color: green;
+    color:white;
+  }
+
+  .active_r {
+    float: right;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none
+  }
+
+  .active_r:hover {
+    background-color: green;
+    color:white;
+  }
+
+  .centerH {
+    float: center;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none
+
+  }
+
   </style>
+<head>
+  <title>TinyApp </title>
+    <ul class="horizontal">
+          <li><a class="active" href ="/"><h1>Home Page</h1></a></li>
+          <li><a class="active" href ="/urls"><h1>My URLS</h1></a></li>
+          <li><a class="active" href ="/urls/new"><h1>Create New URL</h1></a> </li>
+          <li><a class = "active"><h1 style="font-family:'Lucida Console', Monaco, monospace;">&#160;&#160;&#160;&#160;&#160;URL Shrinker&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</h1></a><li>
+          <li><a class="active_r" href ="/login"><h1>Login</h1></a></li>
+          <li><a class="active_r" href ="/register"><h1>Register</h1></a> </li>
 
-<div class ="row">
-                        <div class ="col-sm-5">
-                        <h1><u>Tiny URL</u></h1>
+    </ul>
+
+
+ <div class ="container">
+
+    <div class ="row">
+                          <div class ="col-sm-12" align = "center">
+                              <!-- Checking if user name exists or not-->
+                              <% if (user){  %>
+
+                               <form action="/logout" method="POST" >
+                                 <button type="submit"><h2> Logout </h2> </button>
+                                 <h3><%=user.email%> is logged in</h3>
+                                </form>
+                              <% } else {%>
+                              <p>You are not logged in. Returning User? Click <a href ="/login">Login </a> to log in</p>
+                              <p> OR Click <a href ="/register">Register</a> to Sign up</p>
+
+                              <%}  %>
                         </div>
+    </div>
+  </div>
 
-                        <div class ="col-sm-7">
-                          <!-- Checking if user name exists or not-->
-                          <% if (user){  %>
-<<<<<<< HEAD
-=======
 
->>>>>>> 8af32c062cc6ddfa2258dfc907ea769cbc8c3fe1
-                           <form action="/logout" method="POST" >
-                             <button type="submit"> Logout </button>
-                             <h3><%=user.id%> is logged in</h3>
-                            </form>
-                          <% } else {%>
-                          <p>You are not logged in. Returning User? Click <a href ="/login">Login </a> to log in</p>
-                          <p> OR Click <a href ="/register">Register</a> to Sign up</p>
-<<<<<<< HEAD
-                          <%}  %>
-=======
 
-                          <%}  %>
 
->>>>>>> 8af32c062cc6ddfa2258dfc907ea769cbc8c3fe1
-                        </div>
-</div>
+
+  </div>
 </head>
 </html>
