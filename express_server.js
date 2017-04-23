@@ -28,18 +28,17 @@ return myRandomString;
 function checkEmailExists(emailTest) {
           // CHECK IF EMAIL ALREADY EXISTS
 let myReturnVal = 0;
-    Object.keys(users).forEach(key => {
-    if(emailTest == users[key].email){
-      myReturnVal = 1;;
-      }
-    });
-return myReturnVal;
+  Object.keys(users).forEach(key => {
+  if(emailTest == users[key].email){
+    myReturnVal = 1;;
+    }
+  });
+  return myReturnVal;
 }
-
 
 // Check if email and password match
 function CheckEmailAndPassword(emailTest, passwordTest,res,req) {
-          // CHECK IF EMAIL ALREADY EXISTS
+// CHECK IF EMAIL ALREADY EXISTS
 let myReturnVal = 0;
     Object.keys(users).forEach(key => {
     if((emailTest == users[key].email)&&( bcrypt.compareSync(passwordTest, users[key].password))) {
@@ -47,15 +46,13 @@ let myReturnVal = 0;
       myReturnVal = 1;;
       }
     });
-return myReturnVal;
+  return myReturnVal;
 }
-
-
 
 // LookUp LongURL via ShortURL input
 function lookUpLongURL(shortURL,req, reqType) {
-let currentUserCookie = req.session.user_id;
-let myReturnVal = "";
+  let currentUserCookie = req.session.user_id;
+  let myReturnVal = "";
     Object.keys(urlDatabase).forEach(key => {
       Object.keys(urlDatabase[key]).forEach(key2 => {
         if(shortURL == key2){
@@ -67,7 +64,7 @@ let myReturnVal = "";
         }
       });
     });
-return myReturnVal;
+    return myReturnVal;
 }
 
 
@@ -105,14 +102,10 @@ app.use(cookieSession({
 // TELLS EXPRESS TO USE THE EJS TEMPLATING AGENT
 app.set("view engine", "ejs");
 
-var urlDatabase = {
-
-};
+var urlDatabase = { }; // Start with empty database
 
 // LIST OF USERS
-const users = {
-
-}
+const users = { }; // STart with empty users Object
 
 // GET NEW URLS HERE --------------------------------------------------//
 app.get("/urls/new", (req, res) => {
@@ -143,24 +136,20 @@ app.post("/urls", (req, res) => {
     res.status(401).redirect("/urls");
   }
 
-
 });
 // RESPONDING TO OUR DELETE REQUEST
 app.post("/urls/:id/delete", (req,res) => {
-    // GETTING WHICH SHORT URL KEY TO DELETE FROM OBJECT
-    let ObtainedShortURL_to_Delete = req.params.id;
-    // DELETING FROM OUT OBJECT DATABASE
-     Object.keys(urlDatabase).forEach(key => {
-
-      Object.keys(urlDatabase[key]).forEach(key2 => {
-
-        if(ObtainedShortURL_to_Delete == key2){
+  // GETTING WHICH SHORT URL KEY TO DELETE FROM OBJECT
+  let ObtainedShortURL_to_Delete = req.params.id;
+  // DELETING FROM OUT OBJECT DATABASE
+  Object.keys(urlDatabase).forEach(key => {
+    Object.keys(urlDatabase[key]).forEach(key2 => {
+      if(ObtainedShortURL_to_Delete == key2){
         delete urlDatabase[key][key2];
-        }
-      });
+      }
     });
-
-    res.redirect("http://localhost:8080/urls/");
+  });
+  res.redirect("http://localhost:8080/urls/");
 });
 
 // ------- /urls Event Handler-------------------//
@@ -180,17 +169,14 @@ app.get("/urls", (req,res) => {
 app.get("/u/:shortURL", (req, res) => {
 
   let shortURL = req.params.shortURL;
-
- //do the lookup for the longURL
+  //do the lookup for the longURL
   //LOOKUP LONG URL
   let longURL  = lookUpLongURL(shortURL, req, "lookup");
-
   if(longURL){
   res.redirect(longURL);
   } else{
     res.status(404).send("Invalid request please press back on your browser and try again");
   }
-
 });
 
 // Get OUR UPDATE REQUEST
@@ -198,7 +184,6 @@ app.post("/urls/:id", (req,res) =>{
   let currentUserCookie = req.session.user_id;
   let shortURL = req.params.id;
   let longURL  = req.body.longURL;
-
   //DO MY UPDATE
   let found = updateMyDatabase(shortURL,longURL);
   if(!found){
@@ -208,24 +193,22 @@ app.post("/urls/:id", (req,res) =>{
   } else
 
   res.redirect("/");
-
 });
 
 // ------ Event handler for displaying a single URL and its shortened  //
 app.get("/urls/:id", (req, res) => {
- let currentUserCookie = req.session.user_id;
-
- let longURLf  = lookUpLongURL(req.params.id, req, "update");
+  let currentUserCookie = req.session.user_id;
+  let longURLf  = lookUpLongURL(req.params.id, req, "update");
   let templateVars = { shortURL: req.params.id,
                       longURL: longURLf,
                       user: users[currentUserCookie] };
 
   if(!longURLf){
-      if(!currentUserCookie){
-        res.status(401).redirect("/urls");
-      } else {
-        res.status(403).send("Not a valid URL. Press back on your browser and try again");
-      }
+    if(!currentUserCookie){
+      res.status(401).redirect("/urls");
+    } else {
+      res.status(403).send("Not a valid URL. Press back on your browser and try again");
+    }
   } else if(longURLf == "NotMine") {
     res.status(403).send("Error: You don't have update access to this URL");
   } else {
@@ -233,11 +216,7 @@ app.get("/urls/:id", (req, res) => {
   }
 });
 // --------------------------------------------------------------------//
-
-
-
-
-
+// LOGIN
 app.get("/login", (req, res) => {
   let currentUserCookie = req.session.user_id;
     if(currentUserCookie){
@@ -248,13 +227,11 @@ app.get("/login", (req, res) => {
     }
 });
 
-
 app.post("/login", (req,res) => {
   let myUserEmail = req.body.email;
   let myUserPassword = req.body.password;
-
-   let CheckEmail = checkEmailExists(myUserEmail);
-   let CheckLoginWorked = CheckEmailAndPassword(myUserEmail,myUserPassword,res, req);
+  let CheckEmail = checkEmailExists(myUserEmail);
+  let CheckLoginWorked = CheckEmailAndPassword(myUserEmail,myUserPassword,res, req);
 
    if(!CheckEmail){
     res.status(403).send("Email address doesn't exist. Please try again or register");
@@ -268,11 +245,8 @@ app.post("/login", (req,res) => {
 // ---------------------------------------------------------------------//
 // LOGOUT
 app.post("/logout", (req,res) => {
-
   req.session = null
-
   res.redirect("/");
-
 });
 
 
@@ -288,37 +262,34 @@ app.get("/register", (req, res) => {
 
 app.post("/register",(req,res) =>{
   // get random user id
-    let user_id = generateRandomString();
-    let hashed_password = bcrypt.hashSync(req.body.password, 10);
+  let user_id = generateRandomString();
+  let hashed_password = bcrypt.hashSync(req.body.password, 10);
 
-    let templateVars = {email: req.body.email,
-                      password: hashed_password};
+  let templateVars = {email: req.body.email,
+                    password: hashed_password};
   let CheckEmail = checkEmailExists(templateVars.email);
-
     //CHECK IF EMAIL OR PASSWORD NOT FILLED IN
-        if (!templateVars.email || !templateVars.password){
-          res.status(404).send("You haven't filled in the email or password. Please try again");
-        } else if(CheckEmail){
-          res.status(404).send("We have your email on file, you have already registered. Please login");
-        } else {
-          // Storing User data from register
-             users[user_id] = {
-              id: user_id,
-              email: templateVars.email,
-              password: templateVars.password
-             };
-
-          // SETUP AN EMPTY OBJECT FOR THE NEW USER
-          urlDatabase[user_id] = {};
-          req.session.user_id = user_id; // WRITE A VALUE TO COOKIE
-          res.redirect("/");
-        }
-  });
+    if (!templateVars.email || !templateVars.password){
+      res.status(404).send("You haven't filled in the email or password. Please try again");
+    } else if(CheckEmail){
+      res.status(404).send("We have your email on file, you have already registered. Please login");
+    } else {
+      // Storing User data from register
+         users[user_id] = {
+          id: user_id,
+          email: templateVars.email,
+          password: templateVars.password
+         };
+      // SETUP AN EMPTY OBJECT FOR THE NEW USER
+      urlDatabase[user_id] = {};
+      req.session.user_id = user_id; // WRITE A VALUE TO COOKIE
+      res.redirect("/");
+    }
+});
 
 // ROOT PATH GET REQUEST
 app.get("/",(req,res) =>{
   let currentUserCookie = req.session.user_id;
-
   if(currentUserCookie){
     res.redirect("/urls");
   } else {

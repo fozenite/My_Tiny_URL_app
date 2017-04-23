@@ -1,38 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <% include ./partials/_header.ejs %>
-</head>
-<body>
-  <% if(user) {%>
-  <ul>
+  <head></head>
+  <body>
+    <% include ./partials/_header.ejs %>
+    <% if(user) {%>
+    <ul>
       <% for (i in urls[user.id]) { %>
         <div class ="container">
-            <div class="row">
-                  <div class="col-md-4">
-                      <li><%=i %> : <%=urls[user.id][i] %></li>
-                  </div>
-
-                  <div class="col-xs-4">
-                      <a href="/urls/<%=i %>/">Edit</a>
-                  </div>
-                  <div class="col-xs-4">
-                      <form method="POST" action="/urls/<%=i %>/delete">
-
-                            <button type="submit">Delete<img src="http://customwastega.com/wp-content/uploads/2015/02/noun_16193.png" alt="Waste-basket" style="width:20px;height:20px;">
-                            </button>
-                      </form>
-                  </div>
+          <div class="row">
+            <div class="col-md-4">
+              <li><%=i %> : <%=urls[user.id][i] %></li>
             </div>
+
+            <div class="col-xs-4">
+              <a href="/urls/<%=i %>/">Edit</a>
+            </div>
+
+            <div class="col-xs-4">
+              <form method="POST" action="/urls/<%=i %>/delete">
+                <button type="submit">Delete<img src="http://customwastega.com/wp-content/uploads/2015/02/noun_16193.png" alt="Waste-basket" style="width:20px;height:20px;">
+                </button>
+              </form>
+            </div>
+          </div>
         </div>
-
       <% } %>
-  </ul>
-
-  <% } else {%>
-
-  <h3 align="center"> <font color="red">You are not logged in. Nothing to show here. Please login by clicking the login link above</font></h3>
-
-  <% } %>
-</body>
+    </ul>
+    <% } else {%>
+    <h3 align="center"> <font color="red">You are not logged in. Nothing to show here. Please login by clicking the login link above</font></h3>
+    <% } %>
+  </body>
 </html>
